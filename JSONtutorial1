@@ -1,0 +1,29 @@
+Lightweight data-nterchange format
+Used to send data back and forth to server as text
+Object Notation --> subset of JS
+Use JSONLint to validate pieces of code! (see PPT)
+
+JS and JSON objects are a little different
+- JSON have to have double quotes around both key and value
+var person = {
+"name": "Brad",
+"age": 35
+email: function(){
+return 'brad@gmail.com'; --> this wont work as needs to be an actual data type (e.g a string) 
+}
+person = JSON.stringify(person); to create a string to log to console?
+console.log(person);
+
+person = JSON.parse(person) to parse back to object so that we can do
+console.log(person.name);
+
+
+- JS usually don tdo this
+var person = {
+name: "Brad",
+age: 35,
+email: function(){
+return 'brad@gmail.com';
+}
+console.log(person.email());
+

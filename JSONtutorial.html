@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>JSON Sandbox</title>
+  </head>
+  <body>
+    <ul id="people"></ul>			// this is empty as we are going to add to it
+    <script>
+
+      var person = {
+        name: "Brad",
+        age: 35,
+        address:{
+          street:"5 main st",
+          city: "Boston"
+        },
+        children:["Brianna", "Nicholas"]
+      }
+
+     	//person = JSON.stringify(person);
+     	//person = JSON.parse(person);
+      
+      	// if we want to access the street -> console.log(person.address.street);
+		// if we want to access in the array --> (person.children[1]);
+    
+		var people = [
+        {
+          name:"Brad",
+          age: 35
+        },
+        {
+          name:"John",
+          age:40
+        },
+        {
+          name:"Sara",
+          age:25
+        }
+      ];
+
+      //console.log(people[1].age); to access johns age
+      // you may want to loop through the array and do something with the output
+     
+      var output = '';
+      for(var i = 0;i < people.length;i++){
+        //console.log(people[i].name);
+        // create a ul with id at the top of page
+        // += appends onto the list, in this case, add each persons name
+        output += '<li>'+people[i].name+'</li>';
+      }
+      // people is the li we created to output onto the screen
+      document.getElementById('people').innerHTML = output;
+      
+		// We want to check for the ready state and the status (200 means everythings gone okay)
+		// The response is stored as responseText within xhttp
+		// Need to call this from an actual host/domain/server
+		// Can install nodeJS. from command line to create a live server
+		// When this runs.. console gets the People data from .JSON file
+		// Need to wrap response in JSON.parse otherwise it thorws error because it was a string/array
+		
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var response = JSON.parse(xhttp.responseText);
+            var people = response.people;
+
+            var output = '';
+            for(var i = 0;i < people.length;i++){
+              output += '<li>'+people[i].name+'</li>';
+            }
+            document.getElementById('people').innerHTML = output;
+          }
+      };
+      xhttp.open("GET", "people.json", true);
+      xhttp.send();
+
+    </script>
+  </body>
+</html>
